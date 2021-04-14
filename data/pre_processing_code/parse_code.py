@@ -38,7 +38,9 @@ with open("data/raw_data/HDFS/HDFS_2k.log","r") as file:
         content1.append(content)
 
     parsed_data = pd.DataFrame({'Date':date1, 'Time':time1, 'PID':pid1, 'Level':level1, 'Component':component1, 'Content':content1})
+    #parsed_data.columns.values[0] = "LineID"
     print(parsed_data)
-    parsed_data.to_csv('data/processed_data/HDFS/HDFS_2k_structured.csv')
+
+    parsed_data.to_csv('data/processed_data/HDFS/HDFS_2k_structured.csv', index=False)
 
  
