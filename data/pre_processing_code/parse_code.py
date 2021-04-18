@@ -67,8 +67,9 @@ with open("data/raw_data/HDFS/HDFS_2k.log","r") as file:
     frames = [parsed_data1, parsed_data2_GOT, parsed_data2_non_GOT]
 
     parsed_data = pd.concat(frames)
-    parsed_data['Date'] = pd.to_datetime(parsed_data['Date'], format='%d%m%Y', errors='ignore')
-    parsed_data['Date'] = parsed_data['Date'].str[:10]
+    parsed_data['Date'] = "20"+parsed_data['Date']
+    parsed_data['Date'] = pd.to_datetime(parsed_data['Date'], format='%Y%m%d', errors='ignore')
+    print(parsed_data)
     
     parsed_data.to_csv('data/processed_data/HDFS/HDFS_2k_structured.csv', index=False)
 
