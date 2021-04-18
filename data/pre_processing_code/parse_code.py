@@ -1,6 +1,7 @@
 import re
 import pandas as pd
 import os
+import datetime
 os.chdir("/Volumes/UBC/Block6/586-AdvanceMachineLearning/project/machinelearningproject")
  
 input_file = r"/Volumes/UBC/Block6/586-AdvanceMachineLearning/project/machinelearningproject/data/raw_data/HDFS/HDFS_2k.log"
@@ -66,6 +67,7 @@ with open("data/raw_data/HDFS/HDFS_2k.log","r") as file:
     frames = [parsed_data1, parsed_data2_GOT, parsed_data2_non_GOT]
 
     parsed_data = pd.concat(frames)
+    parsed_data['Date'] = pd.to_datetime(parsed_data['Date'], format='%Y%m%d', errors='ignore')
     
     parsed_data.to_csv('data/processed_data/HDFS/HDFS_2k_structured.csv', index=False)
 
