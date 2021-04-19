@@ -3,11 +3,6 @@ import pandas as pd
 import os
 import datetime
 os.chdir("/Volumes/UBC/Block6/586-AdvanceMachineLearning/project/machinelearningproject")
- 
-input_file = r"/Volumes/UBC/Block6/586-AdvanceMachineLearning/project/machinelearningproject/data/raw_data/HDFS/HDFS_2k.log"
-
-
-output_path = r"/Volumes/UBC/Block6/586-AdvanceMachineLearning/project/machinelearningproject/data/processed_data/HDFS"
 
 date1=[]
 time1=[]
