@@ -11,6 +11,7 @@ level1=[]
 component1=[]
 content1=[]
 type_of_content1=[]
+blockid1=[]
 
 parsed_data=[]
 
@@ -28,6 +29,11 @@ with open("data/raw_data/HDFS/HDFS_2k.log","r") as file:
         content = line.split(':',1)[1].strip() #after colon
         type_of_content = (line.split(':',1)[1].strip()).split(' ', 1)[0]
 
+        # blockid
+        blockid_extra = line.split('blk_',1)[1].strip()
+        blockid = blockid_extra.split(' ',1)[0].strip()
+
+
         date1.append(date)
         time1.append(time)
         pid1.append(pid)
@@ -35,8 +41,9 @@ with open("data/raw_data/HDFS/HDFS_2k.log","r") as file:
         component1.append(component)
         content1.append(content)
         type_of_content1.append(type_of_content)
+        blockid1.append(blockid)
 
-    parsed_data = pd.DataFrame({'Date':date1, 'Time':time1, 'PID':pid1, 'Level':level1, 'Component':component1, 'Content':content1, 'TypeOfContent': type_of_content1})
+    parsed_data = pd.DataFrame({'Date':date1, 'Time':time1, 'PID':pid1, 'Level':level1, 'Component':component1, 'Content':content1, 'TypeOfContent': type_of_content1, 'BlockID': blockid1})
     parsed_data['datetime_id'] = parsed_data['Date']+parsed_data['Time']
     parsed_data['Tag'] = parsed_data['TypeOfContent']
 
@@ -64,6 +71,12 @@ with open("data/raw_data/HDFS/HDFS_2k.log","r") as file:
     parsed_data = pd.concat(frames)
     parsed_data['Date'] = "20"+parsed_data['Date']
     parsed_data['Date'] = pd.to_datetime(parsed_data['Date'], format='%Y%m%d', errors='ignore')
+
+    parsed_data['BlockID'] = "blk_"+parsed_data['BlockID']
+
+
+    
+
     print(parsed_data)
     
     parsed_data.to_csv('data/processed_data/HDFS/HDFS_2k_structured.csv', index=False)
